@@ -22,7 +22,13 @@ public class CSVReader_Writer {
         List <String> names = null;
 
 
-        	reader = Files.newBufferedReader(Paths.get("firstname_males.txt"));
+        try{
+            //protected Code
+            reader = Files.newBufferedReader(Paths.get("firstname_males.txt"));}
+        catch(IOException e){
+            System.out.println(e);
+        }
+
             names = reader.lines()
                     .flatMap(line -> Stream.of(line.split(",")))
                     .collect(Collectors.toList());
@@ -40,7 +46,7 @@ public class CSVReader_Writer {
 
         List<String> names=null;
 
-            BufferedReader reader = Files.newBufferedReader(Paths.get("firstname_female.txt"))
+            BufferedReader reader = Files.newBufferedReader(Paths.get("firstname_female.txt"));
                 names = reader.lines()
                         .flatMap(line -> Stream.of(line.split(",")))
                         .collect(Collectors.toList());
