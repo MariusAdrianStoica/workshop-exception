@@ -2,6 +2,7 @@ package se.lexicon.exceptions.workshop.fileIO;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -21,18 +22,26 @@ public class CSVReader_Writer {
         BufferedReader reader = null;
         List <String> names = null;
 
-
         try{
             //protected Code
-            reader = Files.newBufferedReader(Paths.get("firstname_males.txt"));}
-        catch(IOException e){
-            System.out.println(e);
-        }
-
+            reader = Files.newBufferedReader(Paths.get("firstname_males.txt"));
             names = reader.lines()
                     .flatMap(line -> Stream.of(line.split(",")))
                     .collect(Collectors.toList());
-
+        }
+        catch(IOException e){
+            System.out.println(e);
+            System.out.println("FilePath is not Valid");
+        } finally {
+            System.out.println("-- finally block --");
+            if (names!=null){
+                try{
+                    reader.close();
+                } catch (IOException e) {
+                    System.out.println();
+                }
+            }
+        }
          	return names;
         }
 
@@ -62,7 +71,7 @@ public class CSVReader_Writer {
      * @return List <String> of last names
      * @throws IOException
      */
-    public static List<String> getLastNames() throws IOException{
+   public static List<String> getLastNames() throws IOException{
 
         List<String> names = null;
         BufferedReader reader = null;

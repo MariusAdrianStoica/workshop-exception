@@ -11,6 +11,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		List <String> maleFirstNames = CSVReader_Writer.getMaleFirstNames();
+        System.out.println(maleFirstNames.size());
+
         List <String> femaleFirstNames = CSVReader_Writer.getFemaleFirstNames();
 
         List <String> lastNames = CSVReader_Writer.getLastNames();
