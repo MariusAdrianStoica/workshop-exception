@@ -10,14 +10,14 @@ import se.lexicon.exceptions.workshop.fileIO.CSVReader_Writer;
 public class Main {
 
 	public static void main(String[] args) {
-		
+
 		List <String> maleFirstNames = CSVReader_Writer.getMaleFirstNames();
-        System.out.println(maleFirstNames.size());
 
         List <String> femaleFirstNames = CSVReader_Writer.getFemaleFirstNames();
 
+        List<String> lastNames = null;
         try {
-            List<String> lastNames = CSVReader_Writer.getLastNames();
+            lastNames = CSVReader_Writer.getLastNames();
         }catch (IOException e) {
             System.out.println(e);
         }
