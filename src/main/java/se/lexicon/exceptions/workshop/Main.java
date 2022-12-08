@@ -1,5 +1,6 @@
 package se.lexicon.exceptions.workshop;
 
+import java.io.IOException;
 import java.util.List;
 
 import se.lexicon.exceptions.workshop.data_access.NameService;
@@ -15,8 +16,11 @@ public class Main {
 
         List <String> femaleFirstNames = CSVReader_Writer.getFemaleFirstNames();
 
-        List <String> lastNames = CSVReader_Writer.getLastNames();
-
+        try {
+            List<String> lastNames = CSVReader_Writer.getLastNames();
+        }catch (IOException e) {
+            System.out.println(e);
+        }
 
         NameService nameService = new NameService(maleFirstNames, femaleFirstNames,lastNames);
 
