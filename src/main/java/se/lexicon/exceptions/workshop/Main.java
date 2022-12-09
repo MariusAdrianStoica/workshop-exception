@@ -1,5 +1,6 @@
 package se.lexicon.exceptions.workshop;
 
+import java.io.Console;
 import java.io.IOException;
 import java.util.List;
 
@@ -12,8 +13,18 @@ public class Main {
 	public static void main(String[] args) {
 
 		List <String> maleFirstNames = CSVReader_Writer.getMaleFirstNames();
+        System.out.println(" Male First Name Size: " + maleFirstNames.size());
+        System.out.println("---------------------------");
+
+
+        System.out.println(" Male First Name Size: " + maleFirstNames.size());
+        System.out.println("---------------------------");
 
         List <String> femaleFirstNames = CSVReader_Writer.getFemaleFirstNames();
+        System.out.println("Female First Name Size: "+femaleFirstNames.size());
+        System.out.println("---------------------------");
+
+
 
         List<String> lastNames = null;
         try {

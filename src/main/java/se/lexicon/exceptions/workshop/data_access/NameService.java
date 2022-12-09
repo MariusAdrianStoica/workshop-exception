@@ -1,8 +1,10 @@
 package se.lexicon.exceptions.workshop.data_access;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
+import se.lexicon.exceptions.workshop.DuplicateNameException;
 import se.lexicon.exceptions.workshop.domain.Gender;
 import se.lexicon.exceptions.workshop.domain.Person;
 import se.lexicon.exceptions.workshop.fileIO.CSVReader_Writer;
@@ -61,11 +63,17 @@ public class NameService {
 	     * DuplicateNameException.
 	     * @param name
 	     */
-	    public void addFemaleFirstName(String name){
-	    	femaleFirstNames.add(name);
-	    	CSVReader_Writer.saveFemaleNames(femaleFirstNames);
-	    		
-	    }
+	    public void addFemaleFirstName(String name) throws DuplicateNameException {
+
+		Optional<String> nameToAdd = femaleFirstNames.stream()
+										.filter(n->n.equalsIgnoreCase(name))
+										.findFirst();
+
+		if(!nameToAdd.isPresent()){
+			femaleFirstNames.add(name);
+			CSVReader_Writer.saveFemaleNames(femaleFirstNames);
+			}else throw new DuplicateNameException("Name already exists", 1, name);
+		}
 
 	    /**
 	     * Here you need to check if List<String> maleFirstNames already contains the name
@@ -73,22 +81,34 @@ public class NameService {
 	     * DuplicateNameException.
 	     * @param name
 	     */
-	    public void addMaleFirstName(String name){
-	    	maleFirstNames.add(name);
-	        CSVReader_Writer.saveMaleNames(maleFirstNames);
-	    }
+	    public void addMaleFirstName(String name)throws DuplicateNameException {
 
+			Optional<String> nameToAdd = maleFirstNames.stream()
+					.filter(n -> n.equalsIgnoreCase(name))
+					.findFirst();
+
+			if (!nameToAdd.isPresent()) {
+				maleFirstNames.add(name);
+				CSVReader_Writer.saveMaleNames(maleFirstNames);
+			} else throw new DuplicateNameException("Name already exists", 2, name);
+
+		}
 	    /**
 	     * Here you need to check if List<String> lastNames already contains the name
 	     * If name already exists throw a new custom exception you will have to create called
 	     * DuplicateNameException.
 	     * @param lastName
 	     */
-	    public void addLastName(String lastName){
-	    	lastNames.add(lastName);
-	        CSVReader_Writer.saveLastNames(lastNames);
-	    }
+	    public void addLastName(String lastName) throws DuplicateNameException{
 
+			Optional<String> nameToAdd = lastNames.stream()
+					.filter(n -> n.equalsIgnoreCase(lastName))
+					.findFirst();
 
+			if (!nameToAdd.isPresent()) {
+				lastNames.add(lastName);
+				CSVReader_Writer.saveLastNames(lastNames);
+			} else throw new DuplicateNameException("LastName already exists", 3, lastName);
+		}
 	
 }
