@@ -16,7 +16,6 @@ public class Main {
         System.out.println(" Male First Name Size: " + maleFirstNames.size());
         System.out.println("---------------------------");
 
-
         System.out.println(" Male First Name Size: " + maleFirstNames.size());
         System.out.println("---------------------------");
 
