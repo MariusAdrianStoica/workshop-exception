@@ -30,21 +30,33 @@ public class CSVReader_Writer {
                     .flatMap(line -> Stream.of(line.split(",")))
                     .collect(Collectors.toList());
                     }
-        catch(IOException e){
+        catch(NullPointerException|IOException e){ // MJ-> catch (FileNotFoundException ex) {
             System.out.println(e);
-
-            //todo: FileNotFoundException
             System.out.println("FilePath is not Valid");
+
         } finally {
-            System.out.println("-- finally block --");
-            if (names!=null){
-                try{
-                    reader.close();
-                } catch (IOException e) {
-                    System.out.println(e);
+            //System.out.println("-- finally block --");
+
+            //MJ
+            try {
+                if (reader != null) reader.close();
+            } catch (IOException ex) {
+                System.out.println("Ops! could not close connection!");
+                ex.printStackTrace();
                 }
             }
-        }
+
+
+
+
+            // MS -> if (names!=null){
+            //    try{
+            //        reader.close();
+            //    } catch (IOException e) {
+            //        System.out.println(e);
+            //    }
+            //}
+
          	return names;
         }
 
@@ -63,6 +75,8 @@ public class CSVReader_Writer {
             names = reader.lines()
                     .flatMap(line -> Stream.of(line.split(",")))
                     .collect(Collectors.toList());
+        }catch (FileNotFoundException e){
+            e.printStackTrace(); //MJ
         }catch (IOException e){
             System.out.println(e);
         }
@@ -103,8 +117,9 @@ public class CSVReader_Writer {
      try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("lastnames.txt"))) {
          for (String toWrite : lastNames) {
              writer.append(toWrite + ",");
-             writer.flush();
+
          }
+         writer.flush(); // MJ -> outside try
             }catch (IOException e){
                 System.out.println(e);
             }
@@ -115,8 +130,9 @@ public class CSVReader_Writer {
        try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("firstname_female.txt"))) {
             for (String toWrite : femaleNames) {
                 writer.append(toWrite + ",");
-                writer.flush();
+
             }
+           writer.flush(); // MJ -> outside try
         }catch (IOException e){
             System.out.println(e);
         }
@@ -129,8 +145,9 @@ public class CSVReader_Writer {
        try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("firstname_males.txt"));) {
             for (String toWrite : maleNames) {
                 writer.append(toWrite + ",");
-                writer.flush();
+
             }
+           // MJ -> outside try
         }catch (IOException e){
             System.out.println(e);
         }

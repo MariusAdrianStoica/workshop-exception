@@ -65,7 +65,9 @@ public class NameService {
 	     */
 	    public void addFemaleFirstName(String name) throws DuplicateNameException {
 
-		Optional<String> nameToAdd = femaleFirstNames.stream()
+			// MJ-> if (femaleFirstNames.contains(name)) throw new DuplicateNameException("Sorry! could not add " + name +" already exists in list!");
+
+			Optional<String> nameToAdd = femaleFirstNames.stream()
 										.filter(n->n.equalsIgnoreCase(name))
 										.findFirst();
 
@@ -83,7 +85,9 @@ public class NameService {
 	     */
 	    public void addMaleFirstName(String name)throws DuplicateNameException {
 
-			Optional<String> nameToAdd = maleFirstNames.stream()
+			// MJ ->
+			if (maleFirstNames.contains(name)) throw new DuplicateNameException("Sorry! could not add " + name +" already exists in list!");
+			/*Optional<String> nameToAdd = maleFirstNames.stream()
 					.filter(n -> n.equalsIgnoreCase(name))
 					.findFirst();
 
@@ -91,7 +95,7 @@ public class NameService {
 				maleFirstNames.add(name);
 				CSVReader_Writer.saveMaleNames(maleFirstNames);
 			} else throw new DuplicateNameException("Name already exists", 2, name);
-
+*/
 		}
 	    /**
 	     * Here you need to check if List<String> lastNames already contains the name
@@ -100,6 +104,8 @@ public class NameService {
 	     * @param lastName
 	     */
 	    public void addLastName(String lastName) throws DuplicateNameException{
+
+			// MJ -> if (lastNames.contains(lastName)) throw new DuplicateNameException("Sorry! could not add " + lastName +" already exists in list!");
 
 			Optional<String> nameToAdd = lastNames.stream()
 					.filter(n -> n.equalsIgnoreCase(lastName))

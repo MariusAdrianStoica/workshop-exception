@@ -1,6 +1,16 @@
 package se.lexicon.exceptions.workshop;
 
-public class DuplicateNameException extends Exception{
+public class DuplicateNameException extends RuntimeException{ //MS extends Exception
+
+
+    // MJ -> public class DuplicateNameException extends RuntimeException {
+    //
+    //  public DuplicateNameException(String message) {
+    //    super(message);
+    //  }
+    //
+    //}
+
 
     private String message;
     private Integer errorCode;
@@ -10,6 +20,9 @@ public class DuplicateNameException extends Exception{
         super(message);
         this.errorCode=errorCode;
         this.param = param;
+    }
+    public DuplicateNameException(String message){
+        super(message);
     }
 
     public Integer getErrorCode() {
